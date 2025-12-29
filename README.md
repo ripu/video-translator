@@ -1,12 +1,12 @@
 # Video Translator 🎥 ➡️ 🇮🇹
 
-A modern, cross-platform desktop application to translate video audio into different languages using AI. Built with Electron (Frontend) and Python (Backend).
+A modern, cross-platform desktop application to translate video audio into different languages. Built with Electron (Frontend) and Python (Backend).
 
 ![App Screenshot](https://via.placeholder.com/800x600?text=Video+Translator+App)
 
 ## Features
 - **Drag & Drop Interface**: Simple and intuitive design.
-- **AI-Powered**: Uses advanced speech recognition and translation libraries.
+- **Auto-Translation**: Powered by **Google Speech Recognition** and **Google Translate**.
 - **Cross-Platform**: Works on macOS and Windows.
 - **No Python Required**: Runs as a standalone application.
 - **Frameless UI**: Modern, premium aesthetic.
