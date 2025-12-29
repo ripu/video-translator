@@ -13,6 +13,8 @@ jobs:
       matrix:
         os: [macos-latest, windows-latest]
 
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v4
     
@@ -53,5 +55,11 @@ jobs:
       with:
         name: ${{ matrix.os }}-build
         path: |
+          electron-app/dist/*.dmg
+    - name: Upload binaries to Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
           electron-app/dist/*.dmg
           electron-app/dist/*.exe
