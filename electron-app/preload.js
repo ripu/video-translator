@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
+const confetti = require('canvas-confetti');
 
 contextBridge.exposeInMainWorld('electron', {
     send: (channel, data) => {
@@ -13,5 +14,8 @@ contextBridge.exposeInMainWorld('electron', {
             // Deliberately strip event as it includes `sender` 
             ipcRenderer.on(channel, (event, ...args) => func(...args));
         }
-    }
+    },
+    openPath: (path) => ipcRenderer.send('open-path', path),
+    showItem: (path) => ipcRenderer.send('show-item', path),
+    confetti: (options) => confetti(options)
 });

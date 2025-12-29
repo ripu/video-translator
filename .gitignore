@@ -1,15 +1,25 @@
-# Node.js
-node_modules/
-dist/
-build/
-.DS_Store
-
 # Python
-venv/
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+backend/venv/
+backend/.env
+*.spec
+
+# Node/Electron
+node_modules/
+electron-app/node_modules/
+electron-app/dist/
+dist/
+
+# System
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
 
 # App specific
-*.wav
-*.mp4
-
+*.txt
+!requirements.txt

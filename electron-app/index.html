@@ -10,17 +10,19 @@
 
 <body>
     <div class="container">
-        <h1>Video Translator</h1>
+        <div class="header-logo">
+            <img src="icon.png" alt="Logo" class="app-logo">
+            <h1>Video Translator</h1>
+        </div>
 
         <div class="controls">
             <label for="target-lang">Target Language:</label>
             <select id="target-lang">
-                <option value="en">English (EN)</option>
-                <option value="es">Spanish (ES)</option>
-                <option value="fr">French (FR)</option>
-                <option value="de">German (DE)</option>
-                <option value="it">Italian (IT)</option>
-                <option value="pt">Portuguese (PT)</option>
+                <option value="it-IT">Italian (IT)</option>
+                <option value="en-US">English (US)</option>
+                <option value="es-ES">Spanish (ES)</option>
+                <option value="fr-FR">French (FR)</option>
+                <option value="de-DE">German (DE)</option>
             </select>
         </div>
 
@@ -40,13 +42,16 @@
         </div>
 
         <div id="result" class="result hidden">
-            <div class="column">
-                <h3>Original</h3>
-                <textarea id="original-text" readonly></textarea>
-            </div>
-            <div class="column">
-                <h3>Translated</h3>
-                <textarea id="translated-text" readonly></textarea>
+            <div class="result-header">
+                <h2>Translation Complete! 🎉</h2>
+                <div class="success-actions">
+                    <button id="btn-open-file" class="btn secondary">📄 Open File</button>
+                    <button id="btn-open-folder" class="btn primary">📂 Open Folder</button>
+                </div>
+                <div style="margin-top: 1rem; text-align: center;">
+                    <button id="btn-restart" class="btn secondary"
+                        style="background-color: #f0f0f0; border: 1px solid #ccc;">🔄 Translate Another</button>
+                </div>
             </div>
         </div>
     </div>

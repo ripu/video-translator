@@ -1,12 +1,9 @@
-// const { ipcRenderer } = require('electron'); // Removed: using preload
-
-
 const dropZone = document.getElementById('drop-zone');
 const fileInput = document.getElementById('file-input');
 const statusDiv = document.getElementById('status');
 const resultDiv = document.getElementById('result');
-const originalTextArea = document.getElementById('original-text');
-const translatedTextArea = document.getElementById('translated-text');
+// const originalTextArea = document.getElementById('original-text'); // API removed
+// const translatedTextArea = document.getElementById('translated-text'); // API removed
 const targetLangSelect = document.getElementById('target-lang');
 
 // Drag and Drop Events
@@ -55,11 +52,12 @@ function handleFile(filePath) {
     progressBarFill.style.width = '0%';
     timeRemainingParams.textContent = 'Estimated time remaining: Calculating...';
 
-    originalTextArea.value = '';
-    translatedTextArea.value = '';
+    // originalTextArea.value = '';
+    // translatedTextArea.value = '';
 
     const targetLang = targetLangSelect.value;
     window.electron.send('process-video', { filePath, targetLang });
+    fileInput.value = ''; // Allow re-selecting the same file
 }
 
 // IPC Listeners
@@ -74,12 +72,51 @@ window.electron.on('process-progress', (data) => {
     timeRemainingParams.textContent = `Estimated time remaining: ${minutes}m ${seconds}s`;
 });
 
+// const confetti = require('canvas-confetti'); // Removed: cannot use require in renderer
+
+// ... existing code ...
+
+const btnOpenFile = document.getElementById('btn-open-file');
+const btnOpenFolder = document.getElementById('btn-open-folder');
+
+let currentOutputFile = '';
+
 window.electron.on('processed-video-success', (result) => {
-    statusDiv.textContent = `Completed! Saved to: ${result.output_file}`;
+    statusDiv.textContent = `Completed!`;
+    currentOutputFile = result.output_file;
+
     progressContainer.classList.add('hidden');
     resultDiv.classList.remove('hidden');
-    originalTextArea.value = result.original;
-    translatedTextArea.value = result.translated;
+    // originalTextArea.value = result.original;
+    // translatedTextArea.value = result.translated;
+
+    // 1. Celebration
+    window.electron.confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
+
+    // 2. Notification
+    new Notification('Video Translator', {
+        body: 'Translation processing finished successfully!',
+        icon: 'icon.png' // Ensure icon is available in build
+    });
+});
+
+btnOpenFile.addEventListener('click', () => {
+    if (currentOutputFile) window.electron.openPath(currentOutputFile);
+});
+
+btnOpenFolder.addEventListener('click', () => {
+    if (currentOutputFile) window.electron.showItem(currentOutputFile);
+});
+
+const btnRestart = document.getElementById('btn-restart');
+btnRestart.addEventListener('click', () => {
+    resultDiv.classList.add('hidden');
+    statusDiv.textContent = '';
+    progressContainer.classList.add('hidden');
 });
 
 window.electron.on('processed-video-error', (errorMessage) => {

@@ -24,11 +24,47 @@ The application follows a hybrid **Electron + Python** architecture:
     -   Save result to a `.txt` file (or return to UI).
 4.  **Feedback**: UI updates with "Processing..." -> "Done". Result displayed or file opened.
 
-## 4. Requirements
+## 4. Deployment & Packaging
+- **Tool**: Electron Builder + PyInstaller
+- **MacOS**:
+  - Target: `.dmg`
+  - Architecture: `arm64` (Apple Silicon) / `x64` (Intel)
+  - Strategy:
+    1.  **Backend Build**: `process_video.py` is compiled to a standalone binary `video_processor` using `PyInstaller`.
+    2.  **Inclusion**: The binary is included in the Electron app via `extraResources`.
+    3.  **Permissions Fix**: On macOS, the binary is copied to `app.getPath('userData')` at runtime and given `chmod 755` permissions to bypass App Bundle read-only/permission restrictions.
+- **Windows**:
+  - Target: `.exe` (NSIS Installer)
+  - Method: Cross-compiled via GitHub Actions.
+  - Runtime: Checks for `video_processor.exe`.
+
+## 5. Security & Isolation
+- **IPC**: Uses `contextBridge` in `preload.js` to expose only safe API calls (`send`, `on`, `openPath`).
+- **Sandbox**: Default Electron sandbox enabled (where compatible).
+- **Node Integration**: Disabled in Renderer.
+
+## 6. Directory Structure
+```
+root/
+├── backend/
+│   ├── process_video.py  # Core Logic
+│   ├── venv/             # Python Environment
+│   └── requirements.txt  # Dependencies
+├── electron-app/
+│   ├── main.js           # Main Process
+│   ├── preload.js        # IPC Bridge
+│   ├── renderer.js       # UI Logic
+│   ├── index.html        # UI Structure
+│   └── package.json      # Config & Build Settings
+├── dist/                 # Build Artifacts
+└── SODE.md               # This Document
+```
+
+## 7. Requirements
 -   **OS**: macOS (Cross-platform compatible).
 -   **Dependencies**: Node.js, Python 3, `moviepy`, `SpeechRecognition`, etc.
 
-## 5. Development Procedures
+## 8. Development Procedures
 -   **Updates**: All changes must be tracked via Git.
 -   **Testing**: Local testing of both UI and Python script integration.
 -   **Documentation**: Keep this SODE file updated with new features.
