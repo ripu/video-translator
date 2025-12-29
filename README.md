@@ -8,7 +8,6 @@ A modern, cross-platform desktop application to translate video audio into diffe
 - **Drag & Drop Interface**: Simple and intuitive design.
 - **Auto-Translation**: Powered by **Google Speech Recognition** and **Google Translate**.
 - **Cross-Platform**: Works on macOS and Windows.
-- **No Python Required**: Runs as a standalone application.
 - **Frameless UI**: Modern, premium aesthetic.
 
 ## Tech Stack
