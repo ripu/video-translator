@@ -1,0 +1,15 @@
+# Node.js
+node_modules/
+dist/
+build/
+.DS_Store
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# App specific
+*.wav
+*.mp4
+

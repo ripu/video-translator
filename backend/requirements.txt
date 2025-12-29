@@ -1,0 +1,4 @@
+moviepy
+SpeechRecognition
+deep-translator
+pydub

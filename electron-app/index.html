@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Translator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Video Translator</h1>
+
+        <div class="controls">
+            <label for="target-lang">Target Language:</label>
+            <select id="target-lang">
+                <option value="en">English (EN)</option>
+                <option value="es">Spanish (ES)</option>
+                <option value="fr">French (FR)</option>
+                <option value="de">German (DE)</option>
+                <option value="it">Italian (IT)</option>
+                <option value="pt">Portuguese (PT)</option>
+            </select>
+        </div>
+
+        <div id="drop-zone" class="drop-zone">
+            <p>Drag & Drop Video Here</p>
+            <p class="small">or click to upload</p>
+            <input type="file" id="file-input" accept=".mp4,.mov,.avi" hidden>
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <div id="progress-container" class="progress-container hidden">
+            <div class="progress-bar-bg">
+                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+            </div>
+            <p id="time-remaining">Estimated time remaining: --:--</p>
+        </div>
+
+        <div id="result" class="result hidden">
+            <div class="column">
+                <h3>Original</h3>
+                <textarea id="original-text" readonly></textarea>
+            </div>
+            <div class="column">
+                <h3>Translated</h3>
+                <textarea id="translated-text" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+
+</html>
