@@ -2,7 +2,7 @@
 
 A modern, cross-platform desktop application to translate video audio into different languages. Built with Electron (Frontend) and Python (Backend).
 
-![App Screenshot](https://via.placeholder.com/800x600?text=Video+Translator+App)
+<img width="1610" height="1210" alt="image" src="https://github.com/user-attachments/assets/5fad3c1a-b285-40b9-947f-8fd25c1b4712" />
 
 ## Features
 - **Drag & Drop Interface**: Simple and intuitive design.
